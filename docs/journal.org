@@ -1,0 +1,7 @@
+* TODO
+
+** build decorator to load functions into list
+
+* NEXT
+* STARTED
+* DONE

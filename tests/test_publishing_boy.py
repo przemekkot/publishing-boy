@@ -32,4 +32,10 @@ def test_running():
         assert content.find('This is a test content')
 
 
-def 
+def test_command_line_folders():
+    """Go to cookiecutter download folder, and
+    extract the contents with cli testing.
+
+    Test different types of input folders
+    """
+    pass
