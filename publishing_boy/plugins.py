@@ -18,6 +18,7 @@ def title_extractior(obj):
 
     @return: 'title', generated_content"""
     pass
+    return 'title', 'Some example title'
 
 
 def creation_date(obj):
@@ -26,6 +27,7 @@ def creation_date(obj):
 
     @return: 'date', date(YYYY-mm-dd HH:MM:SS)"""
     pass
+    return 'date', '2019-07-01 01:00:00'
 
 
 def modified_date(obj):
@@ -34,6 +36,7 @@ def modified_date(obj):
 
     @return: 'modified', date(YYYY-mm-dd HH:MM:SS)"""
     pass
+    return 'date', '2019-07-01 01:01:00'
 
 
 def category_extract(obj):
@@ -49,7 +52,3 @@ def category_extract(obj):
 def authors(obj):
     """Return authors"""
     return 'authors', 'Przemek Kot' # TODO: use config file for that
-
-
-
-

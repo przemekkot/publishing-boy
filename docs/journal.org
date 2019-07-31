@@ -1,6 +1,8 @@
 * TODO
 
 ** build decorator to load functions into list
+** fill out the tests
+** run
 
 * NEXT
 * STARTED

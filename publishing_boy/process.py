@@ -3,9 +3,12 @@ import os
 
 
 def build_tuple(filepath, fullpath):
+    assert os.path.exists(fullpath)
+
     filename = os.path.basename(filepath)
 
     content = ''
+
     with open(fullpath, 'r') as f:
         content = f.read()
 
