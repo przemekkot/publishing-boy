@@ -8,8 +8,24 @@ def test_title_extractor():
 
 
 def test_creation_date():
+    # storage is django stuff
+    self.assertEqual(ctime, datetime.fromtimestamp(os.path.getctime(self.storage.path(f_name))))
+
     pass
 
 
 def test_modified_date():
+        """
+        File storage returns a datetime for the last modified time of a file.
+        """
+        self.assertFalse(self.storage.exists('test.file'))
+
+        f = ContentFile('custom contents')
+        f_name = self.storage.save('test.file', f)
+        self.addCleanup(self.storage.delete, f_name)
+        mtime = self.storage.get_modified_time(f_name)
+
+        self.assertEqual(mtime, datetime.fromtimestamp(os.path.getmtime(self.storage.path(f_name))))
+        self.assertLess(timezone.now() - self.storage.get_modified_time(f_name), timedelta(seconds=2))
+    self.assertEqual(atime, datetime.fromtimestamp(os.path.getatime(self.storage.path(f_name))))
     pass

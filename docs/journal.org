@@ -7,3 +7,8 @@
 * NEXT
 * STARTED
 * DONE
+* COMMANDS
+find ./tmp* -name test_post.md
+
+pytest tests/test_process.py
+

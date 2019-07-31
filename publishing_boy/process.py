@@ -2,26 +2,26 @@ import glob
 import os
 
 
-def build_tuple(filepath, fullpath):
-    assert os.path.exists(fullpath)
+def build_tuple(filepath, abspath):
+    assert os.path.exists(abspath)
 
     filename = os.path.basename(filepath)
 
     content = ''
 
-    with open(fullpath, 'r') as f:
+    with open(abspath, 'r') as f:
         content = f.read()
 
-    return filename, filepath, fullpath, content
+    return filename, filepath, abspath, content
 
 
 def file_tuples(folder):
     """Generate file tuples from files in folder"""
-    folder = os.path.join(folder, '**/*.md')
-    results = glob.glob(folder, recursive=True)
-    for fullpath in results:
-        filepath = fullpath.split(folder)[1]  # substract folder
-        yield build_tuple(filepath, fullpath)
+    query = os.path.join(folder, '**/*.md')
+    results = glob.glob(query, recursive=True)
+    for abspath in results:
+        filepath = abspath.split(folder)[1]  # substract folder
+        yield build_tuple(filepath, abspath)
 
 
 def save_content(obj):
