@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+from publishing_boy import config
 """Here are functions that serve the
 role of plugins. Each function
 accepts tuple object with:
@@ -17,8 +19,20 @@ def title_extractior(obj):
     Use NTLK to do stuff with text.
 
     @return: 'title', generated_content"""
-    pass
-    return 'title', 'Some example title'
+    _, _, _, content = obj
+
+    if not content:
+        return 'title', ''
+
+    cut  = 40 if len(content) >= 40 else len(content)
+
+    title = content[:cut].strip() + " ..."
+    pos = content.find(".")
+
+    if pos != -1:
+        title = content[:pos].strip()
+
+    return 'title', title
 
 
 def creation_date(obj):
@@ -26,8 +40,8 @@ def creation_date(obj):
     created.
 
     @return: 'date', date(YYYY-mm-dd HH:MM:SS)"""
-    pass
-    return 'date', '2019-07-01 01:00:00'
+    _, _, abspath, _ = obj
+    return 'date', datetime.fromtimestamp(os.path.getctime(abspath))
 
 
 def modified_date(obj):
@@ -35,8 +49,8 @@ def modified_date(obj):
     modified.
 
     @return: 'modified', date(YYYY-mm-dd HH:MM:SS)"""
-    pass
-    return 'date', '2019-07-01 01:01:00'
+    _, _, abspath, _ = obj
+    return 'date', datetime.fromtimestamp(os.path.getmtime(abspath))
 
 
 def category_extract(obj):
@@ -46,9 +60,12 @@ def category_extract(obj):
     @return: 'category', 'String, Separated, by'
     """
     _, filepath, _, _ = obj
-    return  os.path.dirname(filepath).split("/")
+    names = filter(None, os.path.dirname(filepath).split("/"))
+    categories = ", ".join(map(str.capitalize, names))
+
+    return 'category', categories
 
 
 def authors(obj):
     """Return authors"""
-    return 'authors', 'Przemek Kot' # TODO: use config file for that
+    return 'authors', config['Posts'].get('author', '')
