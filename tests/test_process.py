@@ -1,24 +1,9 @@
-import builtins
-import tempfile
+from django.core.files.base import File, ContentFile
 import os
 import shutil
 import unittest
-from django.core.files.base import File, ContentFile
-from django.core.files.storage import FileSystemStorage
-import django.core.files.storage
-
-
+from publishing_boy.tests.utils import get_storage
 from publishing_boy.process import build_tuple, file_tuples
-
-# dummy django.conf.settings
-class Settings():
-    MEDIA_ROOT = os.path.dirname(os.path.abspath(__file__))
-    MEDIA_URL = 'http://local/'
-    FILE_UPLOAD_PERMISSIONS = 0o777
-    FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o777
-
-# switch settings
-django.core.files.storage.settings = Settings()
 
 
 class ProcessTest(unittest.TestCase):
@@ -27,9 +12,9 @@ class ProcessTest(unittest.TestCase):
         """Prepare file tests"""
         self.filename = 'testing/test_post.md'
         self.content = 'This is my content.'
-        self.temp_dir = tempfile.mkdtemp()
-
-        self.storage = FileSystemStorage(location=self.temp_dir, base_url='/')
+        temp_dir, storage = get_storage()
+        self.temp_dir = temp_dir
+        self.storage = storage
         self.storage.save(self.filename, ContentFile(self.content))
 
     def result_tuple(self):
@@ -56,4 +41,4 @@ class ProcessTest(unittest.TestCase):
         assert list(file_tuples(self.storage.path(''))) == [self.result_tuple()]
 
     def test_save_content(self):
-        assert True
+        assert False

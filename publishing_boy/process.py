@@ -20,7 +20,7 @@ def file_tuples(folder):
     query = os.path.join(folder, '**/*.md')
     results = glob.glob(query, recursive=True)
     for abspath in results:
-        filepath = abspath.split(folder)[1]  # substract folder
+        filepath = str.lstrip(abspath.split(folder)[1], '/')  # substract folder
         yield build_tuple(filepath, abspath)
 
 
