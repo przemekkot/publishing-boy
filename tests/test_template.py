@@ -12,11 +12,13 @@ Authors: A. B
 A b c. E f g. H i j.
 """
 
+date_format = '%Y-%m-%d %H:%M:%S'
+
 context = {
     'title': 'A b c',
-    'cdate': datetime.datetime.strptime('2019-01-01 01:00:00'),
-    'mdate': datetime.datetime.strptime('2019-01-01 01:00:00'),
-    'category': 'A, B, C',
+    'cdate': datetime.datetime.strptime('2019-01-01 01:00:00', date_format),
+    'mdate': datetime.datetime.strptime('2019-01-01 01:00:00', date_format),
+    'categories': 'A, B, C',
     'authors': 'A. B',
     'content': 'A b c. E f g. H i j.',
 }
