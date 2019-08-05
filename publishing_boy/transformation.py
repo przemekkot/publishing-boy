@@ -1,6 +1,5 @@
-
-
 PLUGINS = []
+
 
 def register_plugin(fn):
     def wrapps(*args, **kwargs):

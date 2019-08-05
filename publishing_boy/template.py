@@ -1,10 +1,9 @@
 TEMPLATE = """
 Title: {title}
-Date: {date}
-Modified: {modified}
+Date: {cdate}
+Modified: {mdate}
 Category: {categories}
-Tags: {tags}
-Authors: {author}
+Authors: {authors}
 
 {content}
 """

@@ -41,7 +41,7 @@ def creation_date(obj):
 
     @return: 'date', date(YYYY-mm-dd HH:MM:SS)"""
     _, _, abspath, _ = obj
-    return 'date', datetime.fromtimestamp(os.path.getctime(abspath))
+    return 'cdate', datetime.fromtimestamp(os.path.getctime(abspath))
 
 
 def modified_date(obj):
@@ -50,7 +50,7 @@ def modified_date(obj):
 
     @return: 'modified', date(YYYY-mm-dd HH:MM:SS)"""
     _, _, abspath, _ = obj
-    return 'date', datetime.fromtimestamp(os.path.getmtime(abspath))
+    return 'mdate', datetime.fromtimestamp(os.path.getmtime(abspath))
 
 
 def category_extract(obj):
