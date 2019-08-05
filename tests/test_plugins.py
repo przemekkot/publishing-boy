@@ -23,10 +23,11 @@ def test_title_extractor():
     f2 = ('', 'file.c', '', 'A b c d',)
     f3 = ('', 'a/b/c/file.c', '', '',)
 
-    _, r1 = title_extractior(obj)
+    label, r1 = title_extractior(obj)
     _, r2 = title_extractior(f2)
     _, r3 = title_extractior(f3)
 
+    assert label == 'title'
     assert r1 == 'You have to do it Nicky'
     assert r2 == 'A b c d ...'
     assert r3 == ''
@@ -35,8 +36,9 @@ def test_title_extractor():
 def test_creation_date():
     """Test for creation_date"""
     ctime = storage.get_created_time(filename)
-    _, result_ctime = creation_date(obj)
+    label, result_ctime = creation_date(obj)
 
+    assert label == 'cdate'
     assert ctime == result_ctime
     assert datetime.now() - result_ctime < timedelta(seconds=2)
 
@@ -46,8 +48,9 @@ def test_modified_date():
     storage.save('test.file', ContentFile('custom contents'))
 
     mtime = storage.get_modified_time(filename)
-    _, result_mtime = modified_date(obj)
+    label, result_mtime = modified_date(obj)
 
+    assert label == 'mdate'
     assert mtime == result_mtime
 
     assert datetime.now() - result_mtime < timedelta(seconds=2)
@@ -60,10 +63,11 @@ def test_category_extract():
     f2 = ('', 'a/b/c/file.c', '', '',)
     f3 = ('', '/file.c', '', '',)
 
-    _, r1 = category_extract(f1)
+    label, r1 = category_extract(f1)
     _, r2 = category_extract(f2)
     _, r3 = category_extract(f3)
 
+    assert label == 'categories'
     assert r1 == ''
     assert r2 == 'A, B, C'
     assert r3 == ''
@@ -73,6 +77,7 @@ def test_authors():
     def _author():
         return config['Posts'].get('author', '')
 
-    _, author = authors(obj)
+    label, author = authors(obj)
 
+    assert label == 'authors'
     assert author == _author()

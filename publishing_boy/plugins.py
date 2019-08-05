@@ -63,7 +63,7 @@ def category_extract(obj):
     names = filter(None, os.path.dirname(filepath).split("/"))
     categories = ", ".join(map(str.capitalize, names))
 
-    return 'category', categories
+    return 'categories', categories
 
 
 def authors(obj):
