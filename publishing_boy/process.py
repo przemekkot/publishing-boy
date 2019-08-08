@@ -40,4 +40,7 @@ def create_content_folder(output_path):
     config['Instance'] = {}
     config['Instance']['content_dir'] = output_path
 
-    os.makedirs(output_path)
+    try:
+        os.makedirs(output_path)
+    except FileExistsError:
+        pass

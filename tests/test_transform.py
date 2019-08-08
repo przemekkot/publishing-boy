@@ -1,5 +1,5 @@
 import os
-from publishing_boy.transformation import transform
+from publishing_boy.publishing_boy import transform
 from tests.fixtures import ContentFile, get_test_storage, filename, content
 import shutil
 

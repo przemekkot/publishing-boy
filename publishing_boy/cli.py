@@ -8,21 +8,18 @@ import click
 
 
 @click.command()
-def main(args=None):
+@click.argument('input_folder')
+@click.argument('output_folder')
+def main(input_folder, output_folder):
     """Console script for publishing_boy."""
     click.echo("Replace this message by putting your code into "
                "publishing_boy.cli.main")
     click.echo("See click documentation at http://click.pocoo.org/")
 
-    folder = '' # from click arguments
+    create_content_folder(output_folder)
 
-    destination_dir = ''
-    create_content_folder(destination_dir)
+    report = process(input_folder)
 
-    report = process(folder)
-
-    from pprint import pprint
-    pprint(report)
     return 0
 
 

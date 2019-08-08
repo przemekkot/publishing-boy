@@ -63,3 +63,9 @@ class ProcessTest(unittest.TestCase):
             with self.subTest():
                 create_content_folder(folder)
                 assert self.storage.exists(folder)
+
+        # try doing the same thing one more time
+        for folder in folders:
+            with self.subTest():
+                create_content_folder(folder)
+                assert self.storage.exists(folder)

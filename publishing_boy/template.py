@@ -11,4 +11,5 @@ Authors: {authors}
 
 def render(context):
     """Use simple template render to generate content"""
+    print(context)
     return TEMPLATE.format(**context)

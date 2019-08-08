@@ -15,6 +15,18 @@ by a decorator, during module loading.
 Functions are stored inside a list.
 """
 
+PLUGINS = []
+
+
+def register_plugin(fn):
+    """This decorator add a function to PLUGINS
+    list.
+
+    Order of plugins is not important"""
+    PLUGINS.append(fn)
+
+    return fn
+
 
 @register_plugin
 def content_function(obj):

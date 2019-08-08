@@ -5,31 +5,13 @@
 import os
 import pytest
 
-from publishing_boy import publishing_boy
+from click.testing import CliRunner
+from publishing_boy.cli import main
 
 
 TEST_FILE = 'test.md'
 TEST_FOLDER = 'test_folder'
 TEST_OUTPUT_FILE = 'test_output/test.md'
-
-
-def test_running():
-    """Test working on a test folder"""
-    publishing_boy.process(TEST_FOLDER)
-
-    assert os.path.exists(TEST_OUTPUT_FILE)
-
-    with open(TEST_OUTPUT_FILE, 'r') as f:
-        content = f.read()
-
-        assert content.find('Title:')
-        assert content.find('Date:')
-        assert content.find('Modified:')
-        assert content.find('Category:')
-        assert content.find('Tags:')
-        assert content.find('Authors:')
-
-        assert content.find('This is a test content')
 
 
 def test_command_line_folders():
@@ -38,4 +20,25 @@ def test_command_line_folders():
 
     Test different types of input folders
     """
-    pass
+    from tests.fixtures import ContentFile, get_test_storage, filename, content
+
+    temp_dir, storage = get_test_storage()
+
+    input_folder = os.path.join(temp_dir, 'input')
+    output_folder = os.path.join(temp_dir, 'output')
+
+    os.makedirs(input_folder)
+
+    filepath = os.path.join(input_folder, filename)
+    result_filename = os.path.join(output_folder, filename)
+
+    storage.save(filepath, ContentFile(content))
+
+    assert storage.exists(result_filename) == False
+
+    runner = CliRunner()
+    result = runner.invoke(main, [input_folder, output_folder])
+
+    assert result.exit_code == 0
+    assert storage.exists(output_folder)
+    assert storage.exists(result_filename)

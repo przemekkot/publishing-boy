@@ -21,6 +21,34 @@ from tests.fixtures import (
     obj1 as obj,
 )
 
+content = """i want to use pelican publishing to generate content.
+
+no styles - simply some non-white background and
+some almost-black text - it has to be good for my
+eyes. probably some sepia background and some graphite text.
+
+fuck the titles, i will use markdown to write
+stuff. i will write stuff, then i create a pipleine
+in jenkins that will generate title using ntlk,
+simply some main words, i will refine this and 
+use some ai or shit to generate titles
+but for now i will have tags
+also this will be put into a template of pelican content
+so this will be transformation of one set of files
+into another set of files and this will transform
+into html files
+
+that will be send later to pelican and that will generate
+content, this will publish stuff to github, and
+from github, hetzner will download master branch
+each 6 hours.
+
+i also started a .command file which will store my commands
+for greater future good
+
+my programming style turns out to be more data flow style,
+where the data are being transformed into desired output."""
+
 
 def teardown_module():
     shutil.rmtree(temp_dir)
@@ -40,15 +68,23 @@ def test_title_extractor():
         '',
         '',
     )
+    f4 = (
+        '',
+        'a/b/c/file.c',
+        '',
+        content,
+    )
 
     label, r1 = title_extractior(obj)
     _, r2 = title_extractior(f2)
     _, r3 = title_extractior(f3)
+    _, r4 = title_extractior(f4)
 
     assert label == 'title'
     assert r1 == 'You have to do it Nicky'
     assert r2 == 'A b c d ...'
     assert r3 == ''
+    assert r4 == 'i want to use pelican publishing to generate content'
 
 
 def test_creation_date():
