@@ -16,7 +16,9 @@ Functions are stored inside a list.
 
 def title_extractior(obj):
     """Extract title from content.
-    Use NTLK to do stuff with text.
+    Use NTLK to do stuff with text. - maybe later
+
+    for know i will use first sentence in text
 
     @return: 'title', generated_content"""
     _, _, _, content = obj

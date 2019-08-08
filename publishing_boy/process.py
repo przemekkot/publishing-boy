@@ -26,3 +26,9 @@ def file_tuples(folder):
 
 def save_content(obj):
     return obj
+
+
+def create_content_folder(output_path):
+    """Create in a folder current to running the software
+    folder named 'content' that will keep the output."""
+    pass

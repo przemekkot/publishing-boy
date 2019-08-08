@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from publishing_boy.publishing_boy import process
+from publishing_boy.process import create_content_folder
 
 """Console script for publishing_boy."""
 import sys
@@ -14,6 +15,9 @@ def main(args=None):
     click.echo("See click documentation at http://click.pocoo.org/")
 
     folder = '' # from click arguments
+
+    current_dir = 
+    create_content_folder(current_dir)
 
     report = process(folder)
 
