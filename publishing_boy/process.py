@@ -1,5 +1,8 @@
 import glob
 import os
+from django.core.files.base import File, ContentFile
+from publishing_boy import config
+from publishing_boy.tests.utils import get_storage
 
 
 def build_tuple(filepath, abspath):
@@ -25,10 +28,16 @@ def file_tuples(folder):
 
 
 def save_content(obj):
-    return obj
+    """Save content as a flat file """
+    filename, _, _, content = obj
+    storage = get_storage(config['Instance']['content_dir'])
+    return storage.save(filename, ContentFile(content))
 
 
 def create_content_folder(output_path):
     """Create in a folder current to running the software
     folder named 'content' that will keep the output."""
-    pass
+    config['Instance'] = {}
+    config['Instance']['content_dir'] = output_path
+
+    os.makedirs(output_path)

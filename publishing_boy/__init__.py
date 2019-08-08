@@ -9,8 +9,6 @@ __version__ = '0.1.0'
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 
-print(PATH)
-
 config_file = os.path.join(PATH, 'settings.cfg')
 
 config = configparser.ConfigParser()

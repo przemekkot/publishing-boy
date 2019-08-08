@@ -1,14 +1,16 @@
 * TODO
-** create save_content function and tests
 ** create and test plugin registering decorator
 ** test transform function
-** test for create_content_folder function
 ** devise a way to create a command line test
 ** test processing boy and command line with setting a folder
 
 * NEXT
 * STARTED
 * DONE
+** DONE create save_content function and tests
+   CLOSED: [2019-08-08 czw 20:14]
+** DONE test for create_content_folder function
+   CLOSED: [2019-08-08 czw 20:14]
 * COMMANDS
 find ./tmp* -name test_post.md
 

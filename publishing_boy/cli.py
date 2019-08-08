@@ -16,8 +16,8 @@ def main(args=None):
 
     folder = '' # from click arguments
 
-    current_dir = 
-    create_content_folder(current_dir)
+    destination_dir = ''
+    create_content_folder(destination_dir)
 
     report = process(folder)
 
