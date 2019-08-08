@@ -1,27 +1,45 @@
+import shutil
 from datetime import datetime, timedelta
-import os
 from publishing_boy import config
-from django.core.files.base import File, ContentFile
-from publishing_boy.tests.utils import get_test_storage
-from publishing_boy.plugins import title_extractior, creation_date, modified_date, category_extract, authors
+from django.core.files.base import ContentFile
 
-temp_dir, storage = get_test_storage()
-filename, path = 'test_file.md', 'test_file.md'
-content = """
-You have to do it Nicky. In order to do that, it’s important to have both overlapping and complementary skills on your team: A good rule of thumb is that any task should have at least two people who can do it, and any two people should have a number of significant tasks where one would obviously be better suited to work on it than another. The former is much more important than the latter, but both are important."""
+from publishing_boy.plugins import (
+    title_extractior,
+    creation_date,
+    modified_date,
+    category_extract,
+    authors,
+)
 
-storage.save(filename, ContentFile(content))
 
-obj = (filename,
-       filename,
-       os.path.abspath(storage.path(filename)),
-       content,)
+from tests.fixtures import (
+    temp_dir,
+    storage,
+    filename,
+    path,
+    content,
+    obj1 as obj,
+)
+
+
+def teardown_module():
+    shutil.rmtree(temp_dir)
 
 
 def test_title_extractor():
     """Test title_extractor"""
-    f2 = ('', 'file.c', '', 'A b c d',)
-    f3 = ('', 'a/b/c/file.c', '', '',)
+    f2 = (
+        '',
+        'file.c',
+        '',
+        'A b c d',
+    )
+    f3 = (
+        '',
+        'a/b/c/file.c',
+        '',
+        '',
+    )
 
     label, r1 = title_extractior(obj)
     _, r2 = title_extractior(f2)
@@ -59,9 +77,24 @@ def test_modified_date():
 def test_category_extract():
     """Test category extract"""
 
-    f1 = ('', 'file.c', '', '',)
-    f2 = ('', 'a/b/c/file.c', '', '',)
-    f3 = ('', '/file.c', '', '',)
+    f1 = (
+        '',
+        'file.c',
+        '',
+        '',
+    )
+    f2 = (
+        '',
+        'a/b/c/file.c',
+        '',
+        '',
+    )
+    f3 = (
+        '',
+        '/file.c',
+        '',
+        '',
+    )
 
     label, r1 = category_extract(f1)
     _, r2 = category_extract(f2)
