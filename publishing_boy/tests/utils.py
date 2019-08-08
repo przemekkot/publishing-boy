@@ -16,7 +16,12 @@ class Settings():
 django.core.files.storage.settings = Settings()
 
 
-def get_storage():
+def get_test_storage():
     temp_dir = tempfile.mkdtemp()
     storage = FileSystemStorage(location=temp_dir, base_url='/')
     return temp_dir, storage
+
+
+def get_storage(folder):
+    storage = FileSystemStorage(location=folder, base_url='/')
+    return storage
