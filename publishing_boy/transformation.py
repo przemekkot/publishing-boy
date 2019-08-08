@@ -1,3 +1,5 @@
+from publishing_boy.template import render
+
 PLUGINS = []
 
 
@@ -6,10 +8,9 @@ def register_plugin(fn):
     list.
 
     Order of plugins is not important"""
-    def wrapps(*args, **kwargs):
+    PLUGINS.append(fn)
 
-
-        return wrapps
+    return fn
 
 
 def transform(obj):
@@ -20,6 +21,6 @@ def transform(obj):
     that suits pelican static site generator.
     """
     name , filepath, fullpath, _ = obj
-    context = {key: value for key, value in (plugin(obj) for plugin in plugins)}
+    context = {key: value for key, value in (plugin(obj) for plugin in PLUGINS)}
 
     return name, filepath, fullpath, render(context)
