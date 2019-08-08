@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
 from publishing_boy import config
+from publishing_boy.transformation import register_plugin
+
 """Here are functions that serve the
 role of plugins. Each function
 accepts tuple object with:
@@ -14,6 +16,15 @@ Functions are stored inside a list.
 """
 
 
+@register_plugin
+def content_function(obj):
+    """Just return content"""
+    _, _, _, content = obj
+
+    return 'content', content
+
+
+@register_plugin
 def title_extractior(obj):
     """Extract title from content.
     Use NTLK to do stuff with text. - maybe later
@@ -37,6 +48,7 @@ def title_extractior(obj):
     return 'title', title
 
 
+@register_plugin
 def creation_date(obj):
     """Extract date when the file was
     created.
@@ -46,6 +58,7 @@ def creation_date(obj):
     return 'cdate', datetime.fromtimestamp(os.path.getctime(abspath))
 
 
+@register_plugin
 def modified_date(obj):
     """Extract date when the file was
     modified.
@@ -55,6 +68,7 @@ def modified_date(obj):
     return 'mdate', datetime.fromtimestamp(os.path.getmtime(abspath))
 
 
+@register_plugin
 def category_extract(obj):
     """Extract category. Category are
     the folder names in path file.
@@ -68,6 +82,7 @@ def category_extract(obj):
     return 'categories', categories
 
 
+@register_plugin
 def authors(obj):
     """Return authors"""
     return 'authors', config['Posts'].get('author', '')
