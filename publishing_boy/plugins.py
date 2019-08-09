@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 from publishing_boy import config
-from publishing_boy.transformation import register_plugin
 
 """Here are functions that serve the
 role of plugins. Each function
@@ -98,3 +97,8 @@ def category_extract(obj):
 def authors(obj):
     """Return authors"""
     return 'authors', config['Posts'].get('author', '')
+
+
+def run_plugins(obj):
+    """Run all plugins on object"""
+    return {key: value for key, value in (plugin(obj) for plugin in PLUGINS)}

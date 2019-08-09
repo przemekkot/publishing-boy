@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from publishing_boy.transformation import PLUGINS
 from publishing_boy.template import render
 from publishing_boy.process import (
     create_content_folder,
@@ -7,15 +6,7 @@ from publishing_boy.process import (
     save_content,
 )
 
-from publishing_boy.plugins import (
-    authors,
-    title_extractior,
-    creation_date,
-    modified_date,
-    category_extract,
-    content_function,
-)
-
+from publishing_boy.plugins import run_plugins
 """Main module."""
 
 
@@ -27,7 +18,7 @@ def transform(obj):
     that suits pelican static site generator.
     """
     name , filepath, fullpath, _ = obj
-    context = {key: value for key, value in (plugin(obj) for plugin in PLUGINS)}
+    context = run_plugins(obj)
 
     return name, filepath, fullpath, render(context)
 
