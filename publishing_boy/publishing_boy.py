@@ -32,5 +32,4 @@ def process(folder):
 
     """
     for obj in file_tuples(folder):
-        print(obj)
         save_content(transform(obj))

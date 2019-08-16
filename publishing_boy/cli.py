@@ -12,10 +12,7 @@ import click
 @click.argument('output_folder')
 def main(input_folder, output_folder):
     """Console script for publishing_boy."""
-    click.echo("Replace this message by putting your code into "
-               "publishing_boy.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
-
+    click.echo('Running publishing boy...')
     create_content_folder(output_folder)
 
     report = process(input_folder)

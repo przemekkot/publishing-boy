@@ -1,9 +1,8 @@
-TEMPLATE = """
-Title: {title}
-Date: {cdate}
-Modified: {mdate}
-Category: {categories}
-Authors: {authors}
+TEMPLATE = """title: {title}
+date: {cdate}
+modified: {mdate}
+category: {categories}
+authors: {authors}
 
 {content}
 """
@@ -11,5 +10,4 @@ Authors: {authors}
 
 def render(context):
     """Use simple template render to generate content"""
-    print(context)
     return TEMPLATE.format(**context)
