@@ -18,7 +18,7 @@ setup_requirements = ['pytest-runner', ]
 test_requirements = ['pytest', ]
 
 setup(
-    author="Red",
+    author="Przemyslaw Kot",
     author_email='przemyslaw.kot@gmail.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
@@ -45,11 +45,11 @@ setup(
     include_package_data=True,
     keywords='publishing_boy',
     name='publishing_boy',
-    packages=find_packages(include=['publishing_boy']),
+    packages=find_packages(include=['publishing_boy', 'publishing_boy.tests',]),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/przemekkot/publishing_boy',
-    version='0.1.0',
+    version='0.1.3',
     zip_safe=False,
 )
